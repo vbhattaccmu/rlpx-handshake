@@ -1,6 +1,6 @@
 ## Problem statement
 
-Reimplement RLPx protocol in Rust. Refactored [the original implementation](https://github.com/vorot93/devp2p) as it does not build with recent updates from secp256k1 crate .
+Reimplement RLPx protocol in Rust.
 
 ## Technical Goals
 
