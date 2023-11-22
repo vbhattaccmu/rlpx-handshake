@@ -10,8 +10,6 @@ use tokio_stream::StreamExt;
 
 use crate::{error::HandshakeError, server::networking::*, types::*, utilities::pubkey2id};
 
-/// Peer defines a struct which keeps the message stream between
-/// initiator and recipient live throughout the lifetime of the handshake.
 #[allow(unused)]
 #[derive(Debug)]
 pub struct Peer<Io> {

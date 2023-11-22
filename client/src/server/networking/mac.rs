@@ -11,9 +11,7 @@ pub type HeaderDataBytes = GenericArray<u8, U16>;
 
 #[derive(Debug)]
 pub struct MAC {
-    /// Secret key used for encryption and integrity checking.
     secret: H256,
-    /// Keccak256 hasher used for generating the MAC.
     hasher: Keccak256,
 }
 

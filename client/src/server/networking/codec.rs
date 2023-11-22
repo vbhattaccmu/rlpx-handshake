@@ -24,13 +24,10 @@ use crate::{
 /// Tokio codec for Initiator
 #[derive(Debug)]
 pub struct Codec {
-    /// An instance of an Initiator.
     initiator: Initiator,
-    /// Current InitiatorState
     state: InitiatorState,
 }
 
-/// Current Initiator state of a connection between initiator and recipient.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum InitiatorState {
     Auth,
@@ -39,7 +36,6 @@ pub enum InitiatorState {
     Body,
 }
 
-/// Raw ingress values for the Initiator handshake protocol
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum IngressInitiatorValue {
     AuthReceive(RecipientId),
@@ -47,14 +43,12 @@ pub enum IngressInitiatorValue {
     Message(Bytes),
 }
 
-/// `Initiator` message stream over TCP exchanging raw bytes
 #[derive(Debug)]
 pub struct MessageStream<Io> {
     pub stream: Framed<Io, Codec>,
     pub remote_id: RecipientId,
 }
 
-/// Raw egress values for the Initiator handshake protocol
 #[allow(dead_code)]
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum EgressInitiatorValue {
@@ -76,10 +70,6 @@ impl Codec {
     }
 }
 
-/// impl for Decoding of frames exchanged between initiator and recipient.
-/// The state machine is responsible for decoding frames exchanged between
-/// an initiator and a recipient. It processes the incoming datain a loop
-/// and transitions between different states based on the current state of the handshake.
 impl Decoder for Codec {
     type Item = IngressInitiatorValue;
     type Error = io::Error;
@@ -146,7 +136,6 @@ impl Decoder for Codec {
     }
 }
 
-/// impl for helper objects to write out messages as bytes.
 impl Encoder<EgressInitiatorValue> for Codec {
     type Error = io::Error;
 
@@ -206,7 +195,6 @@ where
     }
 }
 
-/// impl for Stream trait for MessageStream
 impl<Io> Stream for MessageStream<Io>
 where
     Io: Transport,
@@ -228,7 +216,6 @@ where
     }
 }
 
-/// impl for Sink trait for MessageStream
 impl<Io> Sink<Bytes> for MessageStream<Io>
 where
     Io: Transport,

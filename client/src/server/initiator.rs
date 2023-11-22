@@ -29,7 +29,6 @@ use crate::{
     utilities::{id2pubkey, pubkey2id, sha256, sha256_hmac},
 };
 
-/// Initiator struct represents the paricipant initiating the cryptographic protocol.
 #[derive(Debug)]
 pub struct Initiator {
     /// A `H256` value representing a nonce used for cryptographic operations.
